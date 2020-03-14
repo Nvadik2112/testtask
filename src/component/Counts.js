@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 
-class Counter extends Component {
+class Counts extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			countValue: 0,
 			minValue: 0,
-			maxValue: 5
+			maxValue: 10
 		}
-
 	}
 
-	handlerIncrement() {
+	validateCount = newValue => {
+		if (newValue >= this.state.minValue && newValue <= this.state.maxValue) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	handlerIncrease = () => {
 		var newValue = this.state.countValue + 1;
 		if (this.validateCount(newValue)) {
 			this.setState({
@@ -21,7 +28,7 @@ class Counter extends Component {
 
 	}
 
-	handlerDecrement() {
+	handlerDecrease = () => {
 		var newValue = this.state.countValue - 1;
 		if (this.validateCount(newValue)) {
 			this.setState({
@@ -30,7 +37,7 @@ class Counter extends Component {
 		}
 	}
 
-	handlerInput(event) {
+	handlerInput = event => {
 		var value = Number(event.target.value);
 		if (this.validateCount(value)) {
 			this.setState({
@@ -38,16 +45,7 @@ class Counter extends Component {
 			})
 		}
 	}
-
-	validateCount(newValue) {
-		if (newValue >= this.state.minValue && newValue <= this.state.maxValue) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-
+	
 	render() {
 		return (
 			<div className="product_count_wrapper">
@@ -58,12 +56,12 @@ class Counter extends Component {
 						onChange={this.handlerInput.bind(this)}
 						value={this.state.countValue}
 					/>
-					<span className="stepper-arrow up" onClick={this.handlerIncrement.bind(this)}></span>
-					<span className="stepper-arrow down" onClick={this.handlerDecrement.bind(this)}></span>                                            
+					<span className="stepper-arrow up" onClick={this.handlerIncrease.bind(this)}></span>
+					<span className="stepper-arrow down" onClick={this.handlerDecrease.bind(this)}></span>                                            
 				</div>
 			</div>
 		);
 	}
 }
 
-export default Counter;
+export default Counts;
