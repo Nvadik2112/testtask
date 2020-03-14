@@ -1,0 +1,12 @@
+.products-add {
+    width: 300px;
+}
+
+.shop-cart {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    display: flex;
+    text-align: center;
+    width: 20px;
+}
