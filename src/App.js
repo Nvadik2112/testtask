@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import logo from './logo.svg';
+import Price from './component/Price';
+import Counter from './component/Counter';
+import classes from './App.css'
 
 class App extends Component {
 
@@ -11,6 +14,14 @@ class App extends Component {
     this.getJson();
   }
 
+
+  imgPrefix(img) {
+    var imgName = img.split('.');
+    imgName[imgName.length - 2] = imgName[imgName.length - 2] + '_220x220_1';
+
+    return imgName.join('.')
+  }
+
   getJson() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'products.json', false);
@@ -20,13 +31,6 @@ class App extends Component {
     } else {
       this.productsList = JSON.parse(xhr.responseText);
     }
-  }
-
-  imgPrefix(img) {
-    var imgName = img.split('.');
-    imgName[imgName.length - 2] = imgName[imgName.length - 2] + '_220x220_1';
-
-    return imgName.join('.')
   }
 
   render() {
@@ -49,15 +53,18 @@ class App extends Component {
               </div>
               <div className="product_tags hidden-sm">
                 <p>Могут понадобиться:</p>
-                <a href="#" className="url--link">подложка,</a>
+                <div className={classes.assoc__products}>
+                {list.assocProducts}
+                </div>
+                {/* <a href="#" className="url--link">подложка,</a>
                 <a href="#" className="url--link">плинтус натуральный,</a>
                 <a href="#" className="url--link">рулетка,</a>
                 <a href="#" className="url--link">набор для укладки ламината,</a>
                 <a href="#" className="url--link">ножовка по ламинату,</a>
-                <a href="#" className="url--link">гель для стыков ламината Clic Protect.</a>
+                <a href="#" className="url--link">гель для стыков ламината Clic Protect.</a> */}
               </div>
 
-              {/* <Price itemValues={item} /> */}
+              <Price itemValues={list} />
 
               <div className="product_price_points">
                 <p className="ng-binding">Можно купить за 231,75 балла</p>
@@ -75,17 +82,18 @@ class App extends Component {
                 </div>
               </div>
               <div className="product__wrapper">
-									{/* <Counter /> */}
-									<span className="btn btn_cart" data-url="/cart/" data-product-id="9bf0afd7-5190-11e5-b9a9-00259036a192">
-										<span className="ng-binding" data-product-id={list.code}>В корзину</span>
+                <Counter />
+                <span className="btn btn_cart" data-url="/cart/" data-product-id="9bf0afd7-5190-11e5-b9a9-00259036a192">
+                
+                <span className="ng-binding" data-product-id={list.code}>В корзину</span>
 									</span>
-								</div>
             </div>
-          )
-        }
+            </div>
+    )
+  }
         )
-        }
-      </div>
+}
+      </div >
     )
 
   }
