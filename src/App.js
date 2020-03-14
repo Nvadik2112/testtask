@@ -22,8 +22,8 @@ class App extends Component {
   }
 
   getJson() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'products.json', false);
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'products.json', false);    
     xhr.send();
     if (xhr.status !== 200) {
       console.log(xhr.status + 'Product: ' + xhr.statusText);
